@@ -34,7 +34,7 @@ class FairRandomGenerator {
     }
 
     generateRandomValue(max) {
-        this.value = Math.floor(Math.random() * (max + 1));
+        this.value = crypto.randomInt(0, max+1);
         this.hmac = crypto.createHmac('sha256', this.key)
                           .update(this.value.toString())
                           .digest('hex');
@@ -178,7 +178,7 @@ class DiceGame {
 
     async computerSelectsDice() {
         const availableDice = this.diceList.filter(d => d !== this.userDice);
-        const randomIndex = Math.floor(Math.random() * availableDice.length);
+        const randomIndex = crypto.randomInt(0,availableDice.length);
         this.computerDice = availableDice[randomIndex];
         console.log(`I make the first move and choose the ${this.computerDice} dice.`);
     }
